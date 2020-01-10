@@ -1,4 +1,4 @@
-package com.worldwarofants.game.logic;
+package com.worldwarofants.logic;
 
 public class QueenAnt extends Ant {
 

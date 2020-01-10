@@ -1,4 +1,4 @@
-package com.worldwarofants.game.logic;
+package com.worldwarofants.logic;
 
 /**
  * Base class to extend logic objects off of
