@@ -1,15 +1,16 @@
 package com.worldwarofants;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
-public class Main {
+public class WWA {
 
-    private static final String PROPERTIES_PATH = "/";
+    private static final String PROPERTIES_PATH = "wwa.properties";
 
-    Properties p;
+    private Properties p;
 
-    public Main() {
+    public WWA() {
         try {
             loadProperties();
         } catch(IOException e) {
@@ -19,11 +20,19 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main m = new Main();
-        m.p.getProperty("version");
+        WWA m = new WWA();
+        System.out.println(m.getProperty("version"));
     }
 
     private void loadProperties() throws IOException {
-        p.load(getClass().getResourceAsStream(PROPERTIES_PATH));
+        if(p == null) {
+            p = new Properties();
+        }
+
+        p.load(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(PROPERTIES_PATH)));
+    }
+
+    private String getProperty(String property) {
+        return p.getProperty(property);
     }
 }
