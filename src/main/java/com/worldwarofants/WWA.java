@@ -1,12 +1,19 @@
 package com.worldwarofants;
 
+import com.worldwarofants.io.TitleScreen;
+import com.worldwarofants.io.UserInterface;
+
+import static com.worldwarofants.WWAProperties.*;
+import static com.worldwarofants.WWAError.*;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
 
+//TODO Logging
 public class WWA {
 
-    private static final String PROPERTIES_PATH = "wwa.properties";
+    private static final String WWA_VERSION = "0.0.0";
 
     private Properties p;
 
@@ -14,14 +21,19 @@ public class WWA {
         try {
             loadProperties();
         } catch(IOException e) {
+            //TODO probably should print some error to the user here
             e.printStackTrace();
             System.exit(1);
         }
     }
 
     public static void main(String[] args) {
-        WWA m = new WWA();
-        System.out.println(m.getProperty("version"));
+        new WWA().play();
+    }
+
+    public void play() {
+        UserInterface io = new TitleScreen(LOCATION_ASSETS.getName());
+
     }
 
     private void loadProperties() throws IOException {
@@ -29,10 +41,13 @@ public class WWA {
             p = new Properties();
         }
 
-        p.load(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(PROPERTIES_PATH)));
+        p.load(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(PATH_PROPERTIES.getName())));
+        versionCheck();
     }
 
-    private String getProperty(String property) {
-        return p.getProperty(property);
+    private void versionCheck() {
+        if(p.isEmpty() || !WWA_VERSION.equals(p.getProperty(VERSION.getName()))) {
+            throw new IllegalArgumentException(BAD_VERSION.getMessage());
+        }
     }
 }

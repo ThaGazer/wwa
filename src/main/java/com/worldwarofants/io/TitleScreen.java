@@ -4,16 +4,28 @@ import java.io.*;
 
 public class TitleScreen implements UserInterface {
 
+    String assetLocation;
     BufferedReader in;
 
-    public TitleScreen(File inputFile) throws FileNotFoundException {
-        in = new BufferedReader(new FileReader(inputFile));
+    public TitleScreen(String inputFile) {
+        this(new File(inputFile));
+    }
+
+    public TitleScreen(File inputFile) {
+        try {
+            if(inputFile != null) {
+                in = new BufferedReader(new FileReader(inputFile));
+            }
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     @Override
     public void show(BufferedWriter out) {
         try {
-            String line = "";
+            String line;
             while((line = in.readLine()) != null) {
                 out.write(line);
             }
