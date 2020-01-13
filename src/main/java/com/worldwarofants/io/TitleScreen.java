@@ -23,7 +23,7 @@ public class TitleScreen implements UserInterface {
     }
 
     @Override
-    public void show(BufferedWriter out) {
+    public void draw(BufferedWriter out) {
         try {
             String line;
             while((line = in.readLine()) != null) {
