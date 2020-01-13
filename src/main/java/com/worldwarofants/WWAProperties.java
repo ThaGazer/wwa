@@ -1,6 +1,7 @@
 package com.worldwarofants;
 
 public enum WWAProperties {
+    PATH_PROPERTIES("wwa.properties"),
     VERSION("version");
 
     private String propertyName;
