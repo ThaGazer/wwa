@@ -15,8 +15,7 @@ public enum WWAProperties {
         propertyName = name;
     }
 
-    @Override
-    public String toString() {
+    public String getName() {
         return propertyName;
     }
 }
