@@ -1,4 +1,4 @@
-package com.worldwarofants.io;
+package com.worldwarofants.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
